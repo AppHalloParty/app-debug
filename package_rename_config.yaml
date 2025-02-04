@@ -1,0 +1,31 @@
+package_rename_config:
+  android:
+    app_name: HaloParty Social App
+    package_name: live.haloparty.debug
+    override_old_package: com.example.kashaskash
+    lang: kotlin
+
+  ios:
+    app_name: HaloParty Social App
+    bundle_name: HaloParty
+    package_name: live.haloparty.debug
+
+  linux:
+    app_name: HaloParty Social App
+    package_name: live.haloparty.debug
+    exe_name: haloparty-linux-x64
+
+  macos:
+    app_name: HaloParty Social App
+    package_name: live.haloparty.debug
+    copyright_notice: Copyright ©️ 2022 OutdatedGuy. All rights reserved.
+
+  web:
+    app_name: HaloParty Social App
+    description: HaloParty Social App
+
+  windows:
+    app_name: HaloParty Social App
+    organization: HaloParty
+    copyright_notice: Copyright ©️ 2022 OutdatedGuy. All rights reserved.
+    exe_name: haloparty-win32

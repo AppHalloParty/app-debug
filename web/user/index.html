@@ -1,0 +1,1053 @@
+<style>@charset "UTF-8";
+    /* these are overridden inline in the mustache compilation */
+    :root {
+      --background-color: #ffffff;
+      --poweredbybg-color: #f0f0f0;
+      --text-color: #000000;
+      --link-color: #008DD5;
+      --linkhover-color: #005A88;
+      --main-font: "Arvo";
+    }
+    
+    .editing-active {
+      transition: all 0.2s ease-in-out;
+      border: 3px dotted rgba(0, 0, 0, 0.2);
+    }
+    .editing-active:hover {
+      border-color: rgba(31, 175, 132, 0.8);
+      background-color: rgba(31, 175, 132, 0.3);
+      cursor: pointer;
+    }
+    
+    .placeholder-text {
+      font-style: italic;
+      opacity: 0.6;
+    }
+    
+    * {
+      font-family: var(--main-font);
+      font-weight: 400;
+      color: var(--text-color);
+    }
+    
+    body {
+      padding: 0;
+      margin: 0;
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      -webkit-font-feature-settings: "pnum";
+      font-feature-settings: "pnum";
+      font-variant-numeric: proportional-nums;
+      position: relative;
+      background: #fff;
+    }
+    
+    a {
+      color: var(--link-color);
+      transition: all 0.2s linear;
+    }
+    a:focus, a:hover {
+      color: var(--linkhover-color);
+    }
+    a.nohover:hover {
+      text-decoration: none;
+    }
+    
+    .claim-bar {
+      padding: 12px 0;
+      background: #fff;
+      color: #555;
+      font-family: "Oxygen", Helvetica, sans-serif;
+      transition: all 0.3s ease-in-out;
+    }
+    .claim-bar * {
+      font-family: "Oxygen", Helvetica, sans-serif;
+    }
+    .claim-bar div {
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      font-size: 0.9em;
+      cursor: pointer;
+      color: #555;
+    }
+    .claim-bar div span {
+      transition: all 0.3s ease-in-out;
+      color: #008DD5;
+    }
+    .claim-bar:hover {
+      text-decoration: none;
+      text-decoration: none;
+      background: #008DD5;
+      color: white;
+    }
+    .claim-bar:hover div {
+      color: white;
+    }
+    .claim-bar:hover div span {
+      color: white;
+    }
+    
+    .whitelabel-badge-mobile {
+      background: white;
+      padding-left: 0.75em;
+      padding-right: 0.75em;
+      padding-top: 0.25em;
+      padding-bottom: 0.25em;
+      border-radius: 4px;
+      text-align: center;
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: 0.2s all ease-in-out;
+    }
+    .whitelabel-badge-mobile .wl-label {
+      font-size: 0.8em;
+      color: #777;
+    }
+    .whitelabel-badge-mobile * {
+      transition: 0.2s all ease-in-out;
+    }
+    .whitelabel-badge-mobile .st0 {
+      fill: #1FAF84;
+    }
+    .whitelabel-badge-mobile:hover {
+      background: #1FAF84;
+    }
+    .whitelabel-badge-mobile:hover * {
+      color: white;
+    }
+    .whitelabel-badge-mobile:hover .st0 {
+      fill: #ffffff;
+    }
+    @media (min-width: 491px) {
+      .whitelabel-badge-mobile {
+        display: none;
+      }
+    }
+    
+    .promo-badge {
+      display: block;
+      position: relative;
+      background: white;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      text-align: left;
+      transition: 0.2s all ease-in-out;
+      cursor: pointer;
+    }
+    .promo-badge * {
+      font-family: "Oxygen", Helvetica, sans-serif;
+      transition: 0.2s all ease-in-out;
+      line-height: normal;
+      text-align: left;
+    }
+    .promo-badge .pb-loading-container {
+      padding: 0.5em;
+    }
+    .promo-badge .pb-loading-container .lds-ring {
+      display: inline-block;
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
+    .promo-badge .pb-loading-container .lds-ring div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      margin: 4px;
+      border: 4px solid #ddd;
+      border-radius: 50%;
+      animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: #ddd transparent transparent transparent;
+    }
+    .promo-badge .pb-loading-container .lds-ring div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    .promo-badge .pb-loading-container .lds-ring div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    .promo-badge .pb-loading-container .lds-ring div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+    @keyframes lds-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .promo-badge .pb-main-container {
+      display: none;
+      flex-direction: row;
+    }
+    .promo-badge .pb-main-container .pb-text-container {
+      flex: 1;
+      padding-right: 0.5em;
+      align-self: center;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-h1 span {
+      color: #555;
+      font-size: 1.2em;
+      margin-right: 0.2em;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-h1 .pb-ios {
+      width: 16px;
+      height: 16px;
+      fill: #ccc;
+      margin-bottom: -1px;
+      display: none;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-h1 .pb-android {
+      width: 15px;
+      height: 15px;
+      fill: #ccc;
+      stroke: #ccc;
+      margin-bottom: -1px;
+      display: none;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-h2 {
+      color: #888;
+      font-size: 0.9em;
+      margin-top: -2px;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-by {
+      font-size: 0.7em;
+      text-transform: uppercase;
+      text-align: left;
+      margin-top: 4px;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-by a {
+      color: #aaa;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-by a:hover {
+      color: #25d5a1;
+      text-decoration: none;
+    }
+    .promo-badge .pb-main-container img {
+      width: 58px;
+      height: 58px;
+      border-radius: 8px;
+      margin-right: 0.75em;
+      align-self: center;
+      border: none;
+      display: none;
+    }
+    @media (min-width: 600px) {
+      .promo-badge {
+        position: fixed;
+        z-index: 999999999;
+        top: 10px;
+        right: 10px;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      }
+    }
+    
+    footer {
+      background: #222;
+    }
+    footer .editing-active {
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+    footer p {
+      color: #777 !important;
+    }
+    footer .social-icons {
+      background: #222;
+      width: auto;
+      display: inline-block;
+    }
+    footer .social-icons .social-icon {
+      transition: opacity 0.2s ease-in-out;
+      display: inline-block;
+      width: 32px;
+      margin-right: 12px;
+      opacity: 0.5;
+      padding-top: 30px;
+    }
+    footer .social-icons .social-icon path, footer .social-icons .social-icon polygon {
+      transition: all 0.2s linear;
+      fill: white;
+    }
+    footer .social-icons .social-icon:hover {
+      opacity: 1;
+    }
+    footer .social-icons .social-icon.si-muted {
+      border: 2px dashed rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+    }
+    footer .social-icons .social-icon.si-muted path, footer .social-icons .social-icon.si-muted polygon {
+      transition: all 0.2s linear;
+      fill: rgba(255, 255, 255, 0.3);
+    }
+    footer .social-icons.editing-active {
+      margin-top: 30px;
+      padding: 10px;
+      margin-left: -10px;
+    }
+    footer .social-icons.editing-active .social-icon {
+      padding-top: 0;
+    }
+    footer .footer-store-button-container {
+      text-align: right;
+      margin: auto;
+      vertical-align: middle;
+    }
+    @media (max-width: 767px) {
+      footer .footer-store-button-container {
+        text-align: center;
+      }
+    }
+    footer .footer-store-button-container .footer-store-button {
+      padding-top: 2em;
+      padding-bottom: 2em;
+      display: inline-block;
+    }
+    footer .footer-store-button-container .footer-store-button .store-button {
+      height: auto !important;
+      margin: 0 6px;
+    }
+    footer .footer-store-button-container .footer-store-button .store-button img {
+      height: 50px !important;
+    }
+    
+    #header .store-button img {
+      height: 60px !important;
+    }
+    
+    #attribution {
+      transition: all 0.2s ease-in-out;
+      padding: 2em 0;
+      font-size: 0.8em;
+      color: #888 !important;
+    }
+    #attribution p {
+      margin-bottom: 0.45em;
+      font-size: 1.1em;
+    }
+    #attribution a {
+      color: #aaa !important;
+      text-decoration: none;
+    }
+    #attribution a:hover {
+      color: #007bff !important;
+    }
+    
+    h1 {
+      font-size: 3.2em;
+      margin-bottom: 0;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+    
+    h2 {
+      margin-top: 0.2em;
+      margin-bottom: 0.3em;
+      font-size: 1.8em;
+    }
+    
+    h3 {
+      font-weight: normal;
+      font-size: 16px;
+    }
+    
+    html {
+      height: 100%;
+    }
+    
+    body {
+      height: 100%;
+      color: var(--text-color);
+      text-align: center;
+    }
+    
+    .cover-container {
+      margin-right: auto;
+      margin-left: auto;
+    }
+    
+    .cover {
+      padding: 0 1.5rem;
+    }
+    .cover .btn-lg {
+      padding: 0.75rem 1.25rem;
+      font-weight: 700;
+    }
+    
+    p[id="text.line2"] {
+      margin-bottom: 0 !important;
+    }
+    
+    .site-wrapper {
+      position: relative;
+      background-size: cover;
+      min-height: 100vh;
+    }
+    .site-wrapper .editing-active {
+      border-color: var(--text-color);
+    }
+    .site-wrapper .site-wrapper-background {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0.9;
+      background-color: var(--background-color);
+    }
+    .site-wrapper .site-wrapper-inner {
+      padding-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100vh;
+    }
+    @media (min-width: 767px) {
+      .site-wrapper .site-wrapper-inner {
+        padding-top: 0;
+      }
+    }
+    .site-wrapper .site-wrapper-inner .arrows {
+      width: 60px;
+      height: 32px;
+      position: absolute;
+      left: 50%;
+      margin-left: -30px;
+      bottom: 15px;
+      opacity: 0.5;
+    }
+    @media (max-width: 786px) {
+      .site-wrapper .site-wrapper-inner .arrows {
+        display: none;
+      }
+    }
+    .site-wrapper .site-wrapper-inner .arrows path {
+      stroke: var(--text-color);
+      fill: transparent;
+      stroke-width: 2px;
+    }
+    
+    @media (min-width: 40em) {
+      .cover-container {
+        width: 100%;
+      }
+    }
+    @media (max-width: 786px) {
+      * {
+        text-align: center;
+      }
+    }
+    #header {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+    }
+    #header .text-container {
+      text-align: left;
+      position: relative;
+      display: block;
+      padding-left: 2em;
+      padding-right: 2em;
+      flex: 1;
+      max-width: 800px;
+    }
+    #header .text-container .tc-table {
+      width: 100%;
+      display: table;
+      height: auto;
+      padding-bottom: 5em;
+      padding-top: 2em;
+    }
+    @media (min-width: 787px) {
+      #header .text-container .tc-table {
+        height: 100%;
+        padding-bottom: 0;
+      }
+    }
+    #header .text-container .tc-table .editing-ttp {
+      padding: 1em;
+      font-size: 1.2em;
+    }
+    #header .text-container .tc-table .editing-app-button {
+      font-style: italic;
+      padding: 0.25em;
+      font-size: 1.2em;
+      display: inline-block;
+      border-radius: 1em;
+    }
+    #header .text-container .tc-table .editing-app-button:first-of-type {
+      margin-right: 0.5em;
+    }
+    #header .text-container h1 {
+      font-size: 2em;
+      margin-bottom: 0.25em;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      line-height: 1.1em;
+    }
+    @media (min-width: 787px) {
+      #header .text-container h1 {
+        font-size: 3.2em;
+      }
+    }
+    #header .text-container h2 {
+      margin-top: 0.2em;
+      margin-bottom: 0.3em;
+      font-size: 1.3em;
+    }
+    @media (min-width: 787px) {
+      #header .text-container h2 {
+        font-size: 1.8em;
+      }
+    }
+    #header .device-container {
+      padding-bottom: 2em;
+      width: 100%;
+    }
+    #header .device-container img {
+      max-height: 70vh;
+      max-width: 90%;
+      position: relative;
+      margin-top: 5em;
+    }
+    @media (min-width: 787px) {
+      #header .device-container {
+        width: auto;
+        max-width: 40vw;
+        padding-bottom: 0;
+      }
+      #header .device-container img {
+        margin-top: 0;
+      }
+    }
+    
+    .store-button {
+      width: auto;
+      display: inline-block;
+    }
+    .store-button:first-of-type {
+      margin-right: 12px;
+    }
+    @media (max-width: 491px) {
+      .store-button:first-of-type {
+        margin-right: 0;
+        margin-bottom: 12px;
+      }
+    }
+    .store-button:hover {
+      transition: all 0.2s ease-in-out;
+      transform: scale(1.05);
+    }
+    .store-button svg {
+      width: auto;
+      height: 100%;
+      display: block;
+      position: relative;
+    }
+    @media (max-width: 768px) {
+      .store-button {
+        margin: auto;
+      }
+    }
+    
+    @media (max-width: 491px) {
+      .text-to-phone:not(.email-subscribe) {
+        display: none !important;
+      }
+    }
+    .text-to-phone input[type=tel], .text-to-phone input[type=email] {
+      transition: all 0.2s linear;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      outline: none;
+      color: #333 !important;
+      text-align: left;
+    }
+    .text-to-phone input[type=tel]:focus, .text-to-phone input[type=email]:focus {
+      border-color: var(--link-color);
+    }
+    .text-to-phone input[type=email] {
+      padding-left: 12px;
+      width: 230px;
+    }
+    .text-to-phone button, .text-to-phone input[type=submit] {
+      border-radius: 4px;
+      background: var(--link-color);
+      color: white;
+      font-size: 14px;
+      border: 0;
+      padding: 6px 8px;
+      padding-top: 7px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      outline: none;
+      cursor: pointer;
+    }
+    
+    section {
+      padding: 5em 0;
+      background: white;
+    }
+    section:not(.text-section) * {
+      color: #333;
+    }
+    section h2 {
+      font-size: 2.5em;
+      color: #333;
+      padding-bottom: 0.25em;
+      margin-bottom: 0;
+    }
+    
+    #screenshots .owl-nav {
+      padding-top: 3em;
+    }
+    #screenshots .owl-nav button {
+      outline: none;
+    }
+    #screenshots .owl-nav .owl-next, #screenshots .owl-nav .owl-prev {
+      font-size: 2em;
+    }
+    #screenshots .owl-nav .owl-next *, #screenshots .owl-nav .owl-prev * {
+      color: rgba(0, 0, 0, 0.25);
+    }
+    #screenshots .owl-nav .owl-prev {
+      margin-right: 1em;
+    }
+    #screenshots img {
+      border-radius: 0.5em;
+      -webkit-box-shadow: 2px 2px 10px -2px rgba(0, 0, 0, 0.49);
+      -moz-box-shadow: 2px 2px 10px -2px rgba(0, 0, 0, 0.49);
+      box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.49);
+    }
+    #screenshots h2 {
+      padding-bottom: 0.5em;
+      margin-bottom: 2em;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      padding-left: 2em;
+      padding-right: 2em;
+    }
+    @media (max-width: 767px) {
+      #screenshots h2 {
+        padding-left: 0;
+        padding-right: 0;
+        display: block;
+      }
+    }
+    
+    #features p {
+      font-size: 1.4em;
+    }
+    #features ul {
+      padding-left: 1em;
+      padding-top: 0.75em;
+    }
+    #features ul li {
+      list-style-type: circle;
+      font-size: 1.2em;
+      padding-bottom: 0.5em;
+    }
+    #features button {
+      transition: transform 0.2s ease-in-out;
+      padding: 0.75em 1.5em;
+      border: 0;
+      border-radius: 4px;
+      margin-top: 1em;
+      background-color: var(--background-color);
+      color: white;
+      cursor: pointer;
+    }
+    #features button:hover {
+      transform: scale(1.1);
+    }
+    #features .feature-right {
+      text-align: left;
+      padding-top: 2em;
+    }
+    #features .feature-left {
+      text-align: center;
+      padding-right: 0;
+    }
+    #features .feature-left img {
+      max-width: 100%;
+      max-height: 575px;
+    }
+    @media (min-width: 767px) {
+      #features .feature-left {
+        margin: auto;
+        padding-right: 40px;
+      }
+    }
+    @media (max-width: 767px) {
+      #features .feature-right {
+        padding-top: 4em;
+      }
+      #features ul {
+        padding-left: 0;
+      }
+      #features ul li {
+        list-style: none;
+      }
+    }
+    
+    #reviews .stars {
+      width: 100%;
+      padding-bottom: 1.5em;
+    }
+    #reviews .stars svg {
+      color: #eec643;
+      height: 34px;
+      width: 34px;
+    }
+    #reviews .stars svg path {
+      fill: #eec643;
+    }
+    #reviews #quote-carousel {
+      padding: 0 80px;
+    }
+    #reviews #quote-carousel .carousel-control svg {
+      width: 14px;
+    }
+    #reviews #quote-carousel .carousel-control path {
+      fill: #999;
+    }
+    #reviews #quote-carousel .carousel-indicators {
+      margin-bottom: -1em;
+    }
+    #reviews #quote-carousel .carousel-indicators li {
+      background: #c0c0c0;
+    }
+    #reviews #quote-carousel .carousel-indicators .active {
+      background: #666;
+    }
+    #reviews blockquote {
+      position: relative;
+      font-size: 1em;
+      font-style: italic;
+      color: #666;
+      padding: 0 5%;
+      margin-bottom: 0;
+    }
+    @media (min-width: 768px) {
+      #reviews blockquote {
+        font-size: 1.6em;
+        line-height: 1.5em;
+        padding: 0 10%;
+      }
+    }
+    #reviews blockquote footer {
+      background: none !important;
+      font-size: 0.6em;
+      font-weight: 700;
+      color: #c7c6c1;
+    }
+    #reviews blockquote footer:before {
+      content: "―";
+    }
+    
+    a.contact {
+      color: #999;
+    }
+    
+    a.contact:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 767px) {
+      * {
+        text-align: center;
+      }
+    
+      section.text-section .col-xs-12 {
+        padding: 0 15px;
+      }
+    }
+    #dl-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      padding-top: 5em;
+      display: none;
+    }
+    #dl-loader .coffee_cup {
+      width: 20px;
+      height: 24px;
+      border: 1px #999 solid;
+      border-radius: 0px 0px 5px 5px;
+      position: relative;
+      margin: 12px auto;
+    }
+    #dl-loader .coffee_cup:after, #dl-loader .coffee_cup:before {
+      position: absolute;
+      content: "";
+    }
+    #dl-loader .coffee_cup:after {
+      width: 5px;
+      height: 12px;
+      border: 1px #999 solid;
+      border-left: none;
+      border-radius: 0px 20px 20px 0px;
+      left: 20px;
+    }
+    #dl-loader .coffee_cup:before {
+      width: 1px;
+      height: 6px;
+      background-color: #999;
+      top: -10px;
+      left: 4px;
+      box-shadow: 5px 0px 0px 0px #999, 5px -5px 0px 0px #999, 10px 0px 0px 0px #999;
+      -webkit-animation: steam 1s linear infinite alternate;
+      -moz-animation: steam 1s linear infinite alternate;
+      animation: steam 1s linear infinite alternate;
+    }
+    @-webkit-keyframes steam {
+      0% {
+        height: 0px;
+      }
+      100% {
+        height: 6px;
+      }
+    }
+    @-moz-keyframes steam {
+      0% {
+        height: 0px;
+      }
+      100% {
+        height: 6px;
+      }
+    }
+    @keyframes steam {
+      0% {
+        height: 0px;
+      }
+      100% {
+        height: 6px;
+      }
+    }
+    #dl-loader div {
+      color: #666;
+      font-size: 0.9em;
+    }</style>
+    <style>
+            .container {
+              padding-right: 15px;
+              padding-left: 15px;
+              margin-right: auto;
+              margin-left: auto;
+            }
+            @media (min-width: 768px) {
+              .container {
+                width: 750px;
+              }
+            }
+            @media (min-width: 992px) {
+              .container {
+                width: 970px;
+              }
+            }
+            @media (min-width: 1200px) {
+              .container {
+                width: 1170px;
+              }
+            }
+        </style>
+    <style id="global_style">:root {
+        --background-color: #004AC5;
+        --text-color: #ffffff;
+        --link-color: #EEC643;
+        --linkhover-color: #005A88;
+        --main-font: 'Oxygen';
+        --backgroundgradient: True;
+        --backgroundopacity: 0.9;
+    }
+    </style>
+    <style>
+            .grecaptcha-badge{visibility:hidden}*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.main-container{color:#222;padding:2em 0;padding-bottom:4em;text-align:left!important;padding:2em;background:#fff;min-height:400px;-webkit-box-shadow:0 0 3px 0 rgba(0,0,0,.25);-moz-box-shadow:0 0 3px 0 rgba(0,0,0,.25);box-shadow:0 0 3px 0 rgba(0,0,0,.25)}.main-container *{text-align:left!important}.main-container :not(a){color:#222}.main-container ins.adsbygoogle{background:#ccc}.main-container #content p{margin-top:1rem;margin-bottom:1rem}a{color:#009c9c}a:hover{color:#007bff}h2{font-size:1.5em}@media only screen and (max-width:600px){h2{font-size:1.2em}}a.nohover{color:#fff;text-decoration:none}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.fc123-promoclass{padding:10px 20px;cursor:pointer;background:linear-gradient(to right bottom, #4BB3FD, #45A3E6);color:#fff}.fc123-promoclass *{font-family:'Exo 2',sans-serif}.fc123-promoclass img{display:inline-block;margin-right:20px;border-radius:8px;max-height:50px}.fc123-promoclass .fc123-button{padding:10px 30px;border-radius:8px;font-weight:700;transition:all .2s ease-in-out;cursor:pointer}.fc123-promoclass .fc123-button:hover{background:#357ded}.fc123-promoclass h1{text-align:left;font-size:1.8em;margin:0}.fc123-promoclass h2{text-align:left;font-size:1.1em;margin:0}.fc123-pr{font-size:.7em;text-align:right;margin-top:5px;margin-bottom:5px;opacity:.8;margin-right:4px;transition:all .2s ease-in-out}.fc123-pr:hover{opacity:1}@media only screen and (max-width:768px){.fc123-promoclass h1{font-size:1.5em}.fc123-promoclass h2{font-size:1em}.fc123-promoclass{text-align:center!important}.fc123-promoclass .fc123-pc-action{text-align:center;width:100%;margin-top:10px}}@media only screen and (max-width:600px){.fc123-promoclass h1{font-size:1.25em;text-align:center}.fc123-promoclass h2{font-size:.9em;text-align:center}.fc123-promoclass .fc123-button{padding:10px 24px;border-radius:4px;font-size:1em}.fc123-pr{text-align:center;margin-right:0}}
+        </style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="https://TooLive.flycricket.io/privacy.html" property="og:url">
+    <meta content="website" property="og:type">
+    <meta content="Trace - Privacy Policy" property="og:title"/>
+    <!-- <meta property="og:image" content="" /> -->
+    <meta content="" property="og:description"/>
+    <meta content="" name="description"/>
+    <title>Terms of Service</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet"/>
+    </meta></meta></head>
+    <body style="background:#222;">
+    <div style="background:#eee;">
+    <div class="container">
+    <div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-7841493567155718" data-ad-format="auto" data-ad-slot="4671721417" data-full-width-responsive="true" style="display:block"></ins>
+    <script type="text/javascript">
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+    </div>
+    <div class=" main-container">
+    <h2>
+                        
+                            Trace
+                            
+                        &gt; recharge protocol Google pay</h2>
+    <hr/>
+    <div id="content">
+    
+<h2>Recharge agreement</h2>
+
+<p>This Trace user recharge agreement (hereinafter referred to as "this Agreement") stipulates that the user (hereinafter referred to as "you") in: TracePTE.LTD, the rights and obligations of a Singapore company and its affiliated enterprises' products (hereinafter referred to as "Trace" or "Trace platform") to recharge consumption and use.
+Before you agree to this agreement, please carefully read and fully understand the rules and requirements of Trace, as well as the national laws and regulations on such Internet information services.If you object to any of the terms of this agreement, you may choose not to use it; using it means that you will agree to abide by all the provisions of this Agreement and any subsequent amendments we may make to the use agreement from time to time.Otherwise, if you are 18 years old or above, please confirm that you have the ability to use the civil service.</p>
+
+<h2>Article 1 General Provisions</h2>
+
+<p>1.1 Trace platform is a more convenient video social platform provided by Trace team (hereinafter referred to as "the team") for users to conduct live video, watch live video, video chat services, and interact with other registered users in text, voice, video, gift giving, etc.Trace platform will provide users with virtual gifts, technical support, traffic entrance and other services for video social networking.</p>
+<p>1.2 You agree to the pertinence of the service and the cost investment, and agree to pay the corresponding fees according to the recharge rules of the platform.Trace platform guarantees that the recharge rules are equally applicable to the same kind of users.You agree to this agreement before using the above services and online interaction.</p>
+<p>1.3 The final interpretation right of this agreement belongs to Trace platform.Trace has the right to revise and change the protocol, rules and code of conduct of Trace platform (such as Internet website and mobile network) regularly or irregularly. After the change, we will inform you and need you to agree to this agreement again. I hope you understand and agree to this.
+</p>
+<h2>Article 2 service rules</h2>
+
+<p>2.1 "Gold coin" is the virtual currency provided by our team for your relevant consumption on Trace platform. You can use "gold coin" to freely purchase various products or services on Trace platform, such as virtual gifts.You can give the virtual gift to the anchor.However, "gold coins" can not be exchanged for Singapore dollars. You should buy the corresponding amount of "gold coins" according to your actual needs.</p>
+<p>2.2 You can buy "gold coins" by recharging through Trace mobile app (the specific exchange ratio is subject to the rules announced by Trace platform at the time of recharging).</p>
+<p>2.3 On the signing date of this agreement, SGD purchases "gold coins" from Android clients of Trace platform. Trace platform reserves the right to unilaterally change, adjust, suspend or terminate the rules of using SGD to purchase gold coins in accordance with relevant laws and regulations, requirements of competent authorities, business development and other factors.You agree to unconditionally accept the change, adjustment, suspension or termination of the above purchase rules. When the Trace platform carries out the above actions, it will notify you in the way announced on the Trace platform, and it will take effect automatically from the date of announcement, without separate notice to you, and will not bear any responsibility for any loss caused by such actions.</p>
+<p>2.4 When using the recharge method, you must carefully confirm your account number and carefully select the relevant operation options.If your own rights and interests are damaged due to incorrect account number input, improper operation or ignorance of the charging method, Trace platform will not refund or make any compensation.</p>
+<p>2.5 If you recharge in an illegal way or in a way that is not specified by Trace platform, Trace platform does not guarantee the successful or correct completion of the recharge.If your rights and interests are damaged, Trace platform will not make any compensation. Trace platform reserves the right to terminate your Trace account qualification and use various recharge services at any time.</p>
+<p>2.6 After successful recharging, you can freely use the "gold coin" in the increased account number on Trace platform, but Trace platform will not provide any refund or reverse exchange services.</p>
+<p>2.7 If the Trace platform finds a processing error due to system failure or any other reason, whether it is beneficial to the Trace platform or you, the Trace platform has the right to correct the error after notifying you by platform message, SMS, telephone or other reasonable means.If the amount of "gold coins" you actually received is less than the "gold coins" you should have received, Trace platform will make up the difference to your Trace account as soon as possible after confirming the processing error.If the error causes you to receive more "gold coins" than you should get, Trace platform has the right to directly deduct the difference from your Trace account regardless of the nature and reason of the error.</p>
+
+<h2>Article 3 declaration of rights</h2>
+
+<p>3.1 You can check the balance of your "gold coin" on the mobile app at any time.If you have any objection to the record, you should immediately put forward it to Trace platform. If there is any error after verification by Trace platform, it will be corrected; otherwise, you agree that the transaction record on Trace platform will be the only effective basis for "gold coin" transaction.</p>
+<p>3.2 Trace platform has the right to set relevant matters related to the transaction from time to time based on the consideration of transaction security, including but not limited to the transaction limit, transaction times, etc.You understand that the above settings of Trace platform may cause certain inconvenience to your transaction, and you have no objection to this.</p>
+<p>3.3 In any case, the third party shall be responsible for providing relevant services when you purchase "gold coin", and Trace platform shall not be responsible for such responsibilities.</p>
+<p>3.4 When recharging, you should ensure that you are the holder of the bound payment account: Google pay, and can use the account legally and effectively without infringing the legitimate rights and interests of any third party. Otherwise, if the actual owner of the payment account: Google pay is lost, you should be solely responsible for solving the disputes arising therefrom and bear all legal responsibilities.</p>
+<p>3.5 You shall be responsible for any loss or liability arising from the failure of Trace platform to provide "gold coin" purchase service or any error in providing "gold coin" purchase service due to your own reasons. Trace platform shall not be liable, including but not limited to:</p>
+<p>(1) You do not operate in accordance with this agreement or any rules published by Trace from time to time;</p>
+<p>(2) Your Trace account is invalid, lost or blocked;</p>
+<p>(3) Property loss caused by you informing others of your password;</p>
+<p>(4) Property loss caused by your personal intention or gross negligence.</p>
+<p>3.6 If the Trace platform system fails to operate normally due to the following conditions, making you unable to use various services or any virtual property lost, the team will not be liable for damages, including but not limited to:</p>
+<p>(1) During the period of system downtime maintenance, upgrade and adjustment announced by Trace platform;</p>
+<p>(2) Failure of telecommunication communication or equipment to carry out data transmission;</p>
+<p>(3) Due to typhoon, earthquake, tsunami, flood, power failure, war, terrorist attack, government regulation and other force majeure factors, the Trace platform system is unable to perform business;</p>
+<p>(4) Service interruption or delay caused by hacker attack, technical adjustment or failure of telecommunication department, website upgrade, problems of related third party, etc.</p>
+
+<h2>Article 4 punishment rules</h2>
+
+<p>4.1 In case of any of the following circumstances, Trace platform has the right to interrupt or terminate the network services provided to you under this agreement at any time without notice to you:</p>
+<p>(1) The personal data you provided is not true;</p>
+<p>(2) You violate the purchase rules set forth in this Agreement;</p>
+<p>(3) You violate the Trace live activity rules to participate in activities, etc.Except for the situations mentioned in the preceding paragraph, Trace platform reserves the right to interrupt or terminate part or all of the network recharge service at any time without prior notice to you. Trace platform does not have to bear any responsibility to you or any third party for any loss caused by the interruption or termination of the recharge service.</p>
+<p>4.2 If the user illegally uses Google store to recharge his Android mobile phone, or illegally purchases "gold coins" through other channels not recognized by Trace platform, Trace platform has the right to freeze the account and punish it accordingly, or seal it if it is serious.</p>
+<p>4.3 if you use improper means (including but not limited to violating platform rules, exploiting system or rule vulnerabilities, using plug-ins or other cheating programs, etc.), directly or indirectly recharge Trace account, obtain / trade gold coins, virtual gifts and platform rewards, and infringe the interests of Trace platform or other users (whether or not you actually obtain improper interests),Trace platform has the right to confiscate and freeze improper income at any time, block your Trace account and prohibit you from using various services.</p>
+<p>4.4 Users are not allowed to engage in any illegal and criminal activities by recharging, otherwise Trace platform has the right to terminate the service, if the circumstances are serious, it will be transferred to the judicial authorities according to law.</p>
+<p>4.5 When users use Trace platform, if they violate national laws and regulations, Trace user agreement, this agreement or other Trace platform management regulations on users, Trace platform has the right to temporarily or permanently block your account.If the circumstances are serious, the case shall be transferred to a judicial organ according to law.The remaining "gold coins" in your account will be temporarily frozen or deducted from your account after the account is closed or before the account is lifted (if any). It can not be used to purchase virtual products or services on the platform, and the cash value when you purchase "gold coins" will not be returned.</p>
+
+<h2>Article 5 recharge terms for minors</h2>
+
+<p>5.1 Juveniles are not familiar with the world and are easily confused by the virtual world. Guardians should pay more attention to the growth of juveniles, give correct guidance to juveniles in using this product or service, prevent juveniles from knowing the payment information of guardians' Trace account and third-party account, and remind juveniles to pay attention to network security issues, so as to promote the healthy growth of juveniles.</p>
+<p>5.2 If you are a minor under the age of 18, you must be at least 16 years old and rely on your own labor income as the main source of living. Otherwise, please stop using the services under this agreement.Trace platform has the right to judge whether your behavior is effective according to laws and regulations and your usage.</p>
+
+<h2>Article 6 confidentiality obligation</h2>
+
+<p>6.1 Economic, direct or indirect losses shall be compensated by you.Trade secret refers to all practical and non-public information provided by Trace, or learned by you during the use of platform services, or undertaken by Trace to keep confidential to a third party, which is related to Trace business and can bring economic benefits to Trace, including but not limited to technical information, business information and information related to TraceInformation and documents related to the administration of Trace (including this Agreement and related agreements), the amount and settlement method of service fees you get from Trace, standard, ownership method, authorization method, customer list, list of other anchors, contact information, service fees, Trace staff list and other information that are not known to the public.</p>
+<p>6.2 You shall strictly abide by this agreement. Without the written authorization or consent of Trace, you shall not:</p>
+<p>(1) In any way to a third party or unspecified public dissemination, disclosure;</p>
+<p>(2) Use the trade secrets of Trace for purposes other than the purpose of this agreement.</p>
+<p>6.3 This clause shall survive the termination of this agreement.</p>
+
+<h2>Article 7 modification, rescission and termination of the agreement
+</h2>
+<p>7.1 Trace has the right to change, terminate or terminate this agreement when necessary.</p>
+<p>7.2 Trace has the right to terminate the agreement immediately if you have any of the following circumstances:</p>
+<p>(1) Trace finds that you have violated the statements and commitments made in this Agreement;</p>
+<p>(2) Direct or indirect damage to the interests of Trace caused by your personal behavior;</p>
+<p>(3) Violating the laws, regulations or normative provisions of Singapore or your place;</p>
+<p>(4) Breach of other obligations stipulated in this Agreement;</p>
+<p>(5) Perform this agreement in a way that does not meet the requirements of Trace, such as passivity or inaction, and fail to correct within 10 days after Trace's notice.
+</p>
+<h2>Article 8 liability for breach of contract</h2>
+
+<p>8.1 You shall be responsible for all direct and indirect costs, losses and compensations arising from any infringement of the legitimate rights and interests of a third party due to your actions, resulting in a lawsuit, claim and / or damage to the reputation of Trace from a third party, including but not limited to any reasonable expenses incurred by Trace.</p>
+<p>8.2 Trace has the right to claim compensation for the loss caused by your breach of this agreement.</p>
+
+<h2>Article 9 others</h2>
+
+<p>9.1 This agreement can be updated by Trace at any time. Once the updated agreement terms are published, they will replace the original agreement terms without further notice. You can check the latest version of the agreement terms on Trace platform.If you do not accept the modified terms after Trace modifies the terms of the agreement, please stop using the services provided by Trace immediately. If you continue to use the services provided by Trace, you will be deemed to accept the modified agreement.</p>
+<p>9.2 Any dispute related to this Agreement shall be settled by both parties through negotiation.If you have any questions or complaints about the use of this recharge agreement, please contact our data protection officer by email to workcompany27@gmail.com</p>
+<p>9.3 If any provision of this agreement is invalid or unenforceable in whole or in part for any reason, other provisions of this Agreement shall still be valid and binding. Trace platform and users shall try their best to embody the original intention of this agreement.</p>
+
+        
+        
+    </div>
+    </div>
+    </div>
+    </div>
+    <footer><footer>
+    <div class="container">
+    <div class="row">
+    <div class="col-xs-12 col-md-6" style="text-align:left;margin:auto;vertical-align:middle;">
+    <div class="social-icons">
+    </div>
+    <div id="attribution">
+    <!-- <p><a href="/">Homepage</a></p> -->
+    <p>This site is protected by reCAPTCHA and the Google
+                            <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                            <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                        </p>
+    <p>
+                            This website is hosted by
+                            <a href="https://www.flycricket.com">Flycricket</a>
+    </p>
+    <p>Flycricket <a href="https://flycricket.com/privacy.html">Privacy Policy</a>, <a href="https://flycricket.com/cookie_policy.html">Cookie Policy</a>, &amp; <a href="https://flycricket.com/terms.html">Terms of Use</a></p>
+    </div>
+    </div>
+    <div class="col-xs-12 col-md-6 footer-store-button-container">
+    </div>
+    </div>
+    </div>
+    </footer></footer>
+    <script async="" src="https://www.googletagmanager.com/gtag/js"></script>
+    <script id="script_analytics">// $(function () {
+    // 	$.ajax({
+    // 		type: "POST",
+    // 		url: "https://app.flycricket.com/api/website_view/fc677fc1d73c47bab3d3b7934f8ab795",
+    // 		dataType: 'json',
+    // 		contentType: 'application/json',
+    // 		data: JSON.stringify({ referrer: document.referrer }),
+    // 		success: function (resp) {
+    // 			console.log(resp);
+    // 		},
+    // 		error: function (xhr, ajaxOptions, thrownError) {
+    // 			console.error(thrownError);
+    // 		}
+    // 	});
+    // });
+    
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-84588334-7');
+    
+    
+    </script>
+    </body>
+    </html>

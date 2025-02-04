@@ -1,0 +1,143 @@
+plugins {
+    id "com.android.application"
+    id ('org.jetbrains.kotlin.android')
+    id ('com.google.firebase.firebase-perf')
+    id ('com.google.firebase.crashlytics')
+    id ('com.google.gms.google-services')
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '70'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '3.0.0'
+}
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+
+    // packagingOptions det version 17
+    packagingOptions {
+        jniLibs {
+            pickFirsts += ['lib/x86/libc++_shared.so', 'lib/x86_64/libc++_shared.so', 'lib/armeabi-v7a/libc++_shared.so', 'lib/arm64-v8a/libc++_shared.so', '**/libyuv.so', '**/libbanuba-ve-yuv.so']
+        }
+    }
+
+    // compileSdkVersion det version 35
+    compileSdkVersion = flutter.compileSdkVersion
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    subprojects { afterEvaluate { android { compileSdkVersion 35 } } }
+
+
+    defaultConfig {
+        applicationId = "live.haloparty.debug"
+        minSdkVersion 24
+        targetSdkVersion 35
+        compileSdk 35
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    lint {
+        checkReleaseBuilds false
+        disable 'InvalidPackage'
+    }
+    
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    
+    namespace = "live.haloparty.debug"
+
+}
+
+flutter {
+    source '../..'
+}
+
+/*configurations.all {
+    exclude group: 'com.google.android.gms', module: 'play-services-safetynet'
+}*/
+
+dependencies {
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+
+    implementation 'com.google.firebase:firebase-appindexing:20.0.0'
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
+    implementation("com.google.firebase:firebase-appcheck-debug")
+    implementation 'com.google.firebase:firebase-dynamic-links'
+    implementation("com.google.firebase:firebase-firestore")
+
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+    implementation("com.google.android.gms:play-services-instantapps:18.1.0")
+    implementation 'com.google.android.gms:play-services-auth:21.1.1'
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.work:work-runtime-ktx:2.9.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+}
+
+// apply plugin: 'com.google.gms.google-services:4.3.10'
+// apply plugin: 'com.google.firebase.firebase-perf:1.4.0'
+// apply plugin: 'com.google.firebase.crashlytics:2.8.0'

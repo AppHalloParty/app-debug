@@ -1,0 +1,1050 @@
+<style>@charset "UTF-8";
+    /* these are overridden inline in the mustache compilation */
+    :root {
+      --background-color: #ffffff;
+      --poweredbybg-color: #f0f0f0;
+      --text-color: #000000;
+      --link-color: #008DD5;
+      --linkhover-color: #005A88;
+      --main-font: "Arvo";
+    }
+    
+    .editing-active {
+      transition: all 0.2s ease-in-out;
+      border: 3px dotted rgba(0, 0, 0, 0.2);
+    }
+    .editing-active:hover {
+      border-color: rgba(31, 175, 132, 0.8);
+      background-color: rgba(31, 175, 132, 0.3);
+      cursor: pointer;
+    }
+    
+    .placeholder-text {
+      font-style: italic;
+      opacity: 0.6;
+    }
+    
+    * {
+      font-family: var(--main-font);
+      font-weight: 400;
+      color: var(--text-color);
+    }
+    
+    body {
+      padding: 0;
+      margin: 0;
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      -webkit-font-feature-settings: "pnum";
+      font-feature-settings: "pnum";
+      font-variant-numeric: proportional-nums;
+      position: relative;
+      background: #fff;
+    }
+    
+    a {
+      color: var(--link-color);
+      transition: all 0.2s linear;
+    }
+    a:focus, a:hover {
+      color: var(--linkhover-color);
+    }
+    a.nohover:hover {
+      text-decoration: none;
+    }
+    
+    .claim-bar {
+      padding: 12px 0;
+      background: #fff;
+      color: #555;
+      font-family: "Oxygen", Helvetica, sans-serif;
+      transition: all 0.3s ease-in-out;
+    }
+    .claim-bar * {
+      font-family: "Oxygen", Helvetica, sans-serif;
+    }
+    .claim-bar div {
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      font-size: 0.9em;
+      cursor: pointer;
+      color: #555;
+    }
+    .claim-bar div span {
+      transition: all 0.3s ease-in-out;
+      color: #008DD5;
+    }
+    .claim-bar:hover {
+      text-decoration: none;
+      text-decoration: none;
+      background: #008DD5;
+      color: white;
+    }
+    .claim-bar:hover div {
+      color: white;
+    }
+    .claim-bar:hover div span {
+      color: white;
+    }
+    
+    .whitelabel-badge-mobile {
+      background: white;
+      padding-left: 0.75em;
+      padding-right: 0.75em;
+      padding-top: 0.25em;
+      padding-bottom: 0.25em;
+      border-radius: 4px;
+      text-align: center;
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: 0.2s all ease-in-out;
+    }
+    .whitelabel-badge-mobile .wl-label {
+      font-size: 0.8em;
+      color: #777;
+    }
+    .whitelabel-badge-mobile * {
+      transition: 0.2s all ease-in-out;
+    }
+    .whitelabel-badge-mobile .st0 {
+      fill: #1FAF84;
+    }
+    .whitelabel-badge-mobile:hover {
+      background: #1FAF84;
+    }
+    .whitelabel-badge-mobile:hover * {
+      color: white;
+    }
+    .whitelabel-badge-mobile:hover .st0 {
+      fill: #ffffff;
+    }
+    @media (min-width: 491px) {
+      .whitelabel-badge-mobile {
+        display: none;
+      }
+    }
+    
+    .promo-badge {
+      display: block;
+      position: relative;
+      background: white;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      text-align: left;
+      transition: 0.2s all ease-in-out;
+      cursor: pointer;
+    }
+    .promo-badge * {
+      font-family: "Oxygen", Helvetica, sans-serif;
+      transition: 0.2s all ease-in-out;
+      line-height: normal;
+      text-align: left;
+    }
+    .promo-badge .pb-loading-container {
+      padding: 0.5em;
+    }
+    .promo-badge .pb-loading-container .lds-ring {
+      display: inline-block;
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
+    .promo-badge .pb-loading-container .lds-ring div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      margin: 4px;
+      border: 4px solid #ddd;
+      border-radius: 50%;
+      animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: #ddd transparent transparent transparent;
+    }
+    .promo-badge .pb-loading-container .lds-ring div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    .promo-badge .pb-loading-container .lds-ring div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    .promo-badge .pb-loading-container .lds-ring div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+    @keyframes lds-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .promo-badge .pb-main-container {
+      display: none;
+      flex-direction: row;
+    }
+    .promo-badge .pb-main-container .pb-text-container {
+      flex: 1;
+      padding-right: 0.5em;
+      align-self: center;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-h1 span {
+      color: #555;
+      font-size: 1.2em;
+      margin-right: 0.2em;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-h1 .pb-ios {
+      width: 16px;
+      height: 16px;
+      fill: #ccc;
+      margin-bottom: -1px;
+      display: none;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-h1 .pb-android {
+      width: 15px;
+      height: 15px;
+      fill: #ccc;
+      stroke: #ccc;
+      margin-bottom: -1px;
+      display: none;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-h2 {
+      color: #888;
+      font-size: 0.9em;
+      margin-top: -2px;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-by {
+      font-size: 0.7em;
+      text-transform: uppercase;
+      text-align: left;
+      margin-top: 4px;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-by a {
+      color: #aaa;
+    }
+    .promo-badge .pb-main-container .pb-text-container .pb-by a:hover {
+      color: #25d5a1;
+      text-decoration: none;
+    }
+    .promo-badge .pb-main-container img {
+      width: 58px;
+      height: 58px;
+      border-radius: 8px;
+      margin-right: 0.75em;
+      align-self: center;
+      border: none;
+      display: none;
+    }
+    @media (min-width: 600px) {
+      .promo-badge {
+        position: fixed;
+        z-index: 999999999;
+        top: 10px;
+        right: 10px;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      }
+    }
+    
+    footer {
+      background: #222;
+    }
+    footer .editing-active {
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+    footer p {
+      color: #777 !important;
+    }
+    footer .social-icons {
+      background: #222;
+      width: auto;
+      display: inline-block;
+    }
+    footer .social-icons .social-icon {
+      transition: opacity 0.2s ease-in-out;
+      display: inline-block;
+      width: 32px;
+      margin-right: 12px;
+      opacity: 0.5;
+      padding-top: 30px;
+    }
+    footer .social-icons .social-icon path, footer .social-icons .social-icon polygon {
+      transition: all 0.2s linear;
+      fill: white;
+    }
+    footer .social-icons .social-icon:hover {
+      opacity: 1;
+    }
+    footer .social-icons .social-icon.si-muted {
+      border: 2px dashed rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+    }
+    footer .social-icons .social-icon.si-muted path, footer .social-icons .social-icon.si-muted polygon {
+      transition: all 0.2s linear;
+      fill: rgba(255, 255, 255, 0.3);
+    }
+    footer .social-icons.editing-active {
+      margin-top: 30px;
+      padding: 10px;
+      margin-left: -10px;
+    }
+    footer .social-icons.editing-active .social-icon {
+      padding-top: 0;
+    }
+    footer .footer-store-button-container {
+      text-align: right;
+      margin: auto;
+      vertical-align: middle;
+    }
+    @media (max-width: 767px) {
+      footer .footer-store-button-container {
+        text-align: center;
+      }
+    }
+    footer .footer-store-button-container .footer-store-button {
+      padding-top: 2em;
+      padding-bottom: 2em;
+      display: inline-block;
+    }
+    footer .footer-store-button-container .footer-store-button .store-button {
+      height: auto !important;
+      margin: 0 6px;
+    }
+    footer .footer-store-button-container .footer-store-button .store-button img {
+      height: 50px !important;
+    }
+    
+    #header .store-button img {
+      height: 60px !important;
+    }
+    
+    #attribution {
+      transition: all 0.2s ease-in-out;
+      padding: 2em 0;
+      font-size: 0.8em;
+      color: #888 !important;
+    }
+    #attribution p {
+      margin-bottom: 0.45em;
+      font-size: 1.1em;
+    }
+    #attribution a {
+      color: #aaa !important;
+      text-decoration: none;
+    }
+    #attribution a:hover {
+      color: #007bff !important;
+    }
+    
+    h1 {
+      font-size: 3.2em;
+      margin-bottom: 0;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+    
+    h2 {
+      margin-top: 0.2em;
+      margin-bottom: 0.3em;
+      font-size: 1.8em;
+    }
+    
+    h3 {
+      font-weight: normal;
+      font-size: 16px;
+    }
+    
+    html {
+      height: 100%;
+    }
+    
+    body {
+      height: 100%;
+      color: var(--text-color);
+      text-align: center;
+    }
+    
+    .cover-container {
+      margin-right: auto;
+      margin-left: auto;
+    }
+    
+    .cover {
+      padding: 0 1.5rem;
+    }
+    .cover .btn-lg {
+      padding: 0.75rem 1.25rem;
+      font-weight: 700;
+    }
+    
+    p[id="text.line2"] {
+      margin-bottom: 0 !important;
+    }
+    
+    .site-wrapper {
+      position: relative;
+      background-size: cover;
+      min-height: 100vh;
+    }
+    .site-wrapper .editing-active {
+      border-color: var(--text-color);
+    }
+    .site-wrapper .site-wrapper-background {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0.9;
+      background-color: var(--background-color);
+    }
+    .site-wrapper .site-wrapper-inner {
+      padding-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100vh;
+    }
+    @media (min-width: 767px) {
+      .site-wrapper .site-wrapper-inner {
+        padding-top: 0;
+      }
+    }
+    .site-wrapper .site-wrapper-inner .arrows {
+      width: 60px;
+      height: 32px;
+      position: absolute;
+      left: 50%;
+      margin-left: -30px;
+      bottom: 15px;
+      opacity: 0.5;
+    }
+    @media (max-width: 786px) {
+      .site-wrapper .site-wrapper-inner .arrows {
+        display: none;
+      }
+    }
+    .site-wrapper .site-wrapper-inner .arrows path {
+      stroke: var(--text-color);
+      fill: transparent;
+      stroke-width: 2px;
+    }
+    
+    @media (min-width: 40em) {
+      .cover-container {
+        width: 100%;
+      }
+    }
+    @media (max-width: 786px) {
+      * {
+        text-align: center;
+      }
+    }
+    #header {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+    }
+    #header .text-container {
+      text-align: left;
+      position: relative;
+      display: block;
+      padding-left: 2em;
+      padding-right: 2em;
+      flex: 1;
+      max-width: 800px;
+    }
+    #header .text-container .tc-table {
+      width: 100%;
+      display: table;
+      height: auto;
+      padding-bottom: 5em;
+      padding-top: 2em;
+    }
+    @media (min-width: 787px) {
+      #header .text-container .tc-table {
+        height: 100%;
+        padding-bottom: 0;
+      }
+    }
+    #header .text-container .tc-table .editing-ttp {
+      padding: 1em;
+      font-size: 1.2em;
+    }
+    #header .text-container .tc-table .editing-app-button {
+      font-style: italic;
+      padding: 0.25em;
+      font-size: 1.2em;
+      display: inline-block;
+      border-radius: 1em;
+    }
+    #header .text-container .tc-table .editing-app-button:first-of-type {
+      margin-right: 0.5em;
+    }
+    #header .text-container h1 {
+      font-size: 2em;
+      margin-bottom: 0.25em;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      line-height: 1.1em;
+    }
+    @media (min-width: 787px) {
+      #header .text-container h1 {
+        font-size: 3.2em;
+      }
+    }
+    #header .text-container h2 {
+      margin-top: 0.2em;
+      margin-bottom: 0.3em;
+      font-size: 1.3em;
+    }
+    @media (min-width: 787px) {
+      #header .text-container h2 {
+        font-size: 1.8em;
+      }
+    }
+    #header .device-container {
+      padding-bottom: 2em;
+      width: 100%;
+    }
+    #header .device-container img {
+      max-height: 70vh;
+      max-width: 90%;
+      position: relative;
+      margin-top: 5em;
+    }
+    @media (min-width: 787px) {
+      #header .device-container {
+        width: auto;
+        max-width: 40vw;
+        padding-bottom: 0;
+      }
+      #header .device-container img {
+        margin-top: 0;
+      }
+    }
+    
+    .store-button {
+      width: auto;
+      display: inline-block;
+    }
+    .store-button:first-of-type {
+      margin-right: 12px;
+    }
+    @media (max-width: 491px) {
+      .store-button:first-of-type {
+        margin-right: 0;
+        margin-bottom: 12px;
+      }
+    }
+    .store-button:hover {
+      transition: all 0.2s ease-in-out;
+      transform: scale(1.05);
+    }
+    .store-button svg {
+      width: auto;
+      height: 100%;
+      display: block;
+      position: relative;
+    }
+    @media (max-width: 768px) {
+      .store-button {
+        margin: auto;
+      }
+    }
+    
+    @media (max-width: 491px) {
+      .text-to-phone:not(.email-subscribe) {
+        display: none !important;
+      }
+    }
+    .text-to-phone input[type=tel], .text-to-phone input[type=email] {
+      transition: all 0.2s linear;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      outline: none;
+      color: #333 !important;
+      text-align: left;
+    }
+    .text-to-phone input[type=tel]:focus, .text-to-phone input[type=email]:focus {
+      border-color: var(--link-color);
+    }
+    .text-to-phone input[type=email] {
+      padding-left: 12px;
+      width: 230px;
+    }
+    .text-to-phone button, .text-to-phone input[type=submit] {
+      border-radius: 4px;
+      background: var(--link-color);
+      color: white;
+      font-size: 14px;
+      border: 0;
+      padding: 6px 8px;
+      padding-top: 7px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      outline: none;
+      cursor: pointer;
+    }
+    
+    section {
+      padding: 5em 0;
+      background: white;
+    }
+    section:not(.text-section) * {
+      color: #333;
+    }
+    section h2 {
+      font-size: 2.5em;
+      color: #333;
+      padding-bottom: 0.25em;
+      margin-bottom: 0;
+    }
+    
+    #screenshots .owl-nav {
+      padding-top: 3em;
+    }
+    #screenshots .owl-nav button {
+      outline: none;
+    }
+    #screenshots .owl-nav .owl-next, #screenshots .owl-nav .owl-prev {
+      font-size: 2em;
+    }
+    #screenshots .owl-nav .owl-next *, #screenshots .owl-nav .owl-prev * {
+      color: rgba(0, 0, 0, 0.25);
+    }
+    #screenshots .owl-nav .owl-prev {
+      margin-right: 1em;
+    }
+    #screenshots img {
+      border-radius: 0.5em;
+      -webkit-box-shadow: 2px 2px 10px -2px rgba(0, 0, 0, 0.49);
+      -moz-box-shadow: 2px 2px 10px -2px rgba(0, 0, 0, 0.49);
+      box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.49);
+    }
+    #screenshots h2 {
+      padding-bottom: 0.5em;
+      margin-bottom: 2em;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      padding-left: 2em;
+      padding-right: 2em;
+    }
+    @media (max-width: 767px) {
+      #screenshots h2 {
+        padding-left: 0;
+        padding-right: 0;
+        display: block;
+      }
+    }
+    
+    #features p {
+      font-size: 1.4em;
+    }
+    #features ul {
+      padding-left: 1em;
+      padding-top: 0.75em;
+    }
+    #features ul li {
+      list-style-type: circle;
+      font-size: 1.2em;
+      padding-bottom: 0.5em;
+    }
+    #features button {
+      transition: transform 0.2s ease-in-out;
+      padding: 0.75em 1.5em;
+      border: 0;
+      border-radius: 4px;
+      margin-top: 1em;
+      background-color: var(--background-color);
+      color: white;
+      cursor: pointer;
+    }
+    #features button:hover {
+      transform: scale(1.1);
+    }
+    #features .feature-right {
+      text-align: left;
+      padding-top: 2em;
+    }
+    #features .feature-left {
+      text-align: center;
+      padding-right: 0;
+    }
+    #features .feature-left img {
+      max-width: 100%;
+      max-height: 575px;
+    }
+    @media (min-width: 767px) {
+      #features .feature-left {
+        margin: auto;
+        padding-right: 40px;
+      }
+    }
+    @media (max-width: 767px) {
+      #features .feature-right {
+        padding-top: 4em;
+      }
+      #features ul {
+        padding-left: 0;
+      }
+      #features ul li {
+        list-style: none;
+      }
+    }
+    
+    #reviews .stars {
+      width: 100%;
+      padding-bottom: 1.5em;
+    }
+    #reviews .stars svg {
+      color: #eec643;
+      height: 34px;
+      width: 34px;
+    }
+    #reviews .stars svg path {
+      fill: #eec643;
+    }
+    #reviews #quote-carousel {
+      padding: 0 80px;
+    }
+    #reviews #quote-carousel .carousel-control svg {
+      width: 14px;
+    }
+    #reviews #quote-carousel .carousel-control path {
+      fill: #999;
+    }
+    #reviews #quote-carousel .carousel-indicators {
+      margin-bottom: -1em;
+    }
+    #reviews #quote-carousel .carousel-indicators li {
+      background: #c0c0c0;
+    }
+    #reviews #quote-carousel .carousel-indicators .active {
+      background: #666;
+    }
+    #reviews blockquote {
+      position: relative;
+      font-size: 1em;
+      font-style: italic;
+      color: #666;
+      padding: 0 5%;
+      margin-bottom: 0;
+    }
+    @media (min-width: 768px) {
+      #reviews blockquote {
+        font-size: 1.6em;
+        line-height: 1.5em;
+        padding: 0 10%;
+      }
+    }
+    #reviews blockquote footer {
+      background: none !important;
+      font-size: 0.6em;
+      font-weight: 700;
+      color: #c7c6c1;
+    }
+    #reviews blockquote footer:before {
+      content: "―";
+    }
+    
+    a.contact {
+      color: #999;
+    }
+    
+    a.contact:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 767px) {
+      * {
+        text-align: center;
+      }
+    
+      section.text-section .col-xs-12 {
+        padding: 0 15px;
+      }
+    }
+    #dl-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      padding-top: 5em;
+      display: none;
+    }
+    #dl-loader .coffee_cup {
+      width: 20px;
+      height: 24px;
+      border: 1px #999 solid;
+      border-radius: 0px 0px 5px 5px;
+      position: relative;
+      margin: 12px auto;
+    }
+    #dl-loader .coffee_cup:after, #dl-loader .coffee_cup:before {
+      position: absolute;
+      content: "";
+    }
+    #dl-loader .coffee_cup:after {
+      width: 5px;
+      height: 12px;
+      border: 1px #999 solid;
+      border-left: none;
+      border-radius: 0px 20px 20px 0px;
+      left: 20px;
+    }
+    #dl-loader .coffee_cup:before {
+      width: 1px;
+      height: 6px;
+      background-color: #999;
+      top: -10px;
+      left: 4px;
+      box-shadow: 5px 0px 0px 0px #999, 5px -5px 0px 0px #999, 10px 0px 0px 0px #999;
+      -webkit-animation: steam 1s linear infinite alternate;
+      -moz-animation: steam 1s linear infinite alternate;
+      animation: steam 1s linear infinite alternate;
+    }
+    @-webkit-keyframes steam {
+      0% {
+        height: 0px;
+      }
+      100% {
+        height: 6px;
+      }
+    }
+    @-moz-keyframes steam {
+      0% {
+        height: 0px;
+      }
+      100% {
+        height: 6px;
+      }
+    }
+    @keyframes steam {
+      0% {
+        height: 0px;
+      }
+      100% {
+        height: 6px;
+      }
+    }
+    #dl-loader div {
+      color: #666;
+      font-size: 0.9em;
+    }</style>
+    <style>
+            .container {
+              padding-right: 15px;
+              padding-left: 15px;
+              margin-right: auto;
+              margin-left: auto;
+            }
+            @media (min-width: 768px) {
+              .container {
+                width: 750px;
+              }
+            }
+            @media (min-width: 992px) {
+              .container {
+                width: 970px;
+              }
+            }
+            @media (min-width: 1200px) {
+              .container {
+                width: 1170px;
+              }
+            }
+        </style>
+    <style id="global_style">:root {
+        --background-color: #004AC5;
+        --text-color: #ffffff;
+        --link-color: #EEC643;
+        --linkhover-color: #005A88;
+        --main-font: 'Oxygen';
+        --backgroundgradient: True;
+        --backgroundopacity: 0.9;
+    }
+    </style>
+    <style>
+            .grecaptcha-badge{visibility:hidden}*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.main-container{color:#222;padding:2em 0;padding-bottom:4em;text-align:left!important;padding:2em;background:#fff;min-height:400px;-webkit-box-shadow:0 0 3px 0 rgba(0,0,0,.25);-moz-box-shadow:0 0 3px 0 rgba(0,0,0,.25);box-shadow:0 0 3px 0 rgba(0,0,0,.25)}.main-container *{text-align:left!important}.main-container :not(a){color:#222}.main-container ins.adsbygoogle{background:#ccc}.main-container #content p{margin-top:1rem;margin-bottom:1rem}a{color:#009c9c}a:hover{color:#007bff}h2{font-size:1.5em}@media only screen and (max-width:600px){h2{font-size:1.2em}}a.nohover{color:#fff;text-decoration:none}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.fc123-promoclass{padding:10px 20px;cursor:pointer;background:linear-gradient(to right bottom, #4BB3FD, #45A3E6);color:#fff}.fc123-promoclass *{font-family:'Exo 2',sans-serif}.fc123-promoclass img{display:inline-block;margin-right:20px;border-radius:8px;max-height:50px}.fc123-promoclass .fc123-button{padding:10px 30px;border-radius:8px;font-weight:700;transition:all .2s ease-in-out;cursor:pointer}.fc123-promoclass .fc123-button:hover{background:#357ded}.fc123-promoclass h1{text-align:left;font-size:1.8em;margin:0}.fc123-promoclass h2{text-align:left;font-size:1.1em;margin:0}.fc123-pr{font-size:.7em;text-align:right;margin-top:5px;margin-bottom:5px;opacity:.8;margin-right:4px;transition:all .2s ease-in-out}.fc123-pr:hover{opacity:1}@media only screen and (max-width:768px){.fc123-promoclass h1{font-size:1.5em}.fc123-promoclass h2{font-size:1em}.fc123-promoclass{text-align:center!important}.fc123-promoclass .fc123-pc-action{text-align:center;width:100%;margin-top:10px}}@media only screen and (max-width:600px){.fc123-promoclass h1{font-size:1.25em;text-align:center}.fc123-promoclass h2{font-size:.9em;text-align:center}.fc123-promoclass .fc123-button{padding:10px 24px;border-radius:4px;font-size:1em}.fc123-pr{text-align:center;margin-right:0}}
+        </style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="https://TooLive.flycricket.io/privacy.html" property="og:url">
+    <meta content="website" property="og:type">
+    <meta content="Trace - Privacy Policy" property="og:title"/>
+    <!-- <meta property="og:image" content="" /> -->
+    <meta content="" property="og:description"/>
+    <meta content="" name="description"/>
+    <title>Terms of Service</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet"/>
+    </meta></meta></head>
+    <body style="background:#222;">
+    <div style="background:#eee;">
+    <div class="container">
+    <div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-7841493567155718" data-ad-format="auto" data-ad-slot="4671721417" data-full-width-responsive="true" style="display:block"></ins>
+    <script type="text/javascript">
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+    </div>
+    <div class=" main-container">
+    <h2>
+                        
+                            Trace
+                            
+                        &gt; Live Agreements</h2>
+    <hr/>
+    <div id="content">
+    
+        <p>This Trace host agreement (hereinafter referred to as "this Agreement") stipulates the rights and obligations between the company and its affiliated enterprises (hereinafter referred to as "Trace" or "Trace platform") and the host (hereinafter referred to as "you") regarding the provision of video / voice live broadcasting services on Trace platform.Please read this Agreement carefully before the live video / voice broadcast to ensure that you have fully understood the terms of this agreement.You are not entitled to use the services covered by this Agreement unless you accept all the terms of this agreement.Your live video / voice broadcast on Trace platform will be regarded as your acceptance of this Agreement and agree to be bound by the terms of this agreement.</p>
+        
+        <h2>Article 1 General Provisions</h2>
+        
+        <p>1.1 You must be at least 18 years old and have full capacity for civil conduct; or you must be at least 16 years old and live mainly from your own labor income.If you do not meet the above conditions, you should immediately terminate the registration or use.</p>
+        <p>1.2 Trace will provide you with the live video / voice broadcast service of the platform anchor. You can use the above services for performance sharing and online interaction after agreeing to this agreement.</p>
+        <p>1.3 According to this Agreement and the rules of the platform, you apply to be the anchor on Trace platform to provide online video / voice live service for users of Trace platform and interact with them.The period when you provide services on Trace platform shall be regarded as within the term of the agreement.Trace conducts formal audit on the content (including but not limited to pictures, posters, avatars, audio, video, etc.) uploaded by you or edited, produced by you, but you still need to bear corresponding legal responsibilities for the authenticity, legality, accuracy, timeliness, etc. of the above content.</p>
+        <p>1.4 In the process of registering or using this service, you need to fill in or submit some necessary information and materials for Trace platform review.If the information you submit is incomplete or does not comply with the provisions of laws and regulations or Trace platform, you may not be able to register successfully or be restricted in the process of using this service.If your personal information or contact information changes, you must update it to Trace in time.
+        1.5 Trace only provides you with online live interactive network platform, you and Trace do not constitute any employment or labor relationship.</p>
+        
+        <h2>Article 2 service rules</h2>
+        
+        <p>2.1 Trace has the right to revise and change the protocols, rules and code of conduct of Trace platform (such as Internet website and mobile network) regularly or irregularly. You understand and agree with this.</p>
+        <p>2.2 Trace has the right to entrust the management of the anchor to other third-party organizations entrusted by your studio or brokerage company (hereinafter referred to as "guild") according to your application or the rules published on the platform.</p>
+        <p>2.3 Trace and the guild have the right to assess and evaluate you according to the rules of the platform (the assessment and evaluation criteria include but are not limited to the length of live broadcast, the number of users watching, the number and types of virtual gifts given by users, user support, user complaints, violations of laws and regulations, etc.), so as to determine your virtual props and income; if you violate laws, regulations or vsTrace and the guild will take punitive measures (including but not limited to deduction of virtual props and income, or even direct closure of your account).</p>
+        <p>2.4 Trace has the right to put forward suggestions and opinions on the improvement of the live broadcast service on the Trace platform. You should make corresponding rectification
+        within 3 days after receiving the suggestions or opinions from Trace. Otherwise, Trace has the right to take the above-mentioned punishment measures.</p>
+    
+        <p>2.5 Trace has the right to review the legality of your live video / voice content (including but not limited to pictures, posters, avatars, audio, video, etc.) according to laws and regulations or the requirements of relevant departments.If the content of video / voice live broadcast violates the law, rules and regulations, or infringes upon the legitimate rights and interests of Trace or a third party, Trace has the right to take measures such as stopping the broadcast, deleting the content, closing the account, canceling the account, and cooperating with the competent department for investigation.</p>
+        <p>2.6 Trace has the right to mark the watermark with Trace logo (or name) and time in your live broadcast room. You need to make corresponding adjustment according to the live broadcast effect.</p>
+        <p>2.7 Trace is responsible for providing you with a platform for live video / voice broadcasting, and providing platform technical service support.However, Trace does not guarantee that the network service can meet any of your requirements, that the network service is always smooth, and that the network service is timely, secure, and accurate.</p>
+        <p>2.8 Trace will contact you or send relevant notices through platform announcement, platform message push, e-mail, SMS or conventional letter transmission.Such notice shall be deemed to have been served on the day it is sent.</p>
+        <p>2.9 In view of the particularity of the live video / voice service, you agree that Trace has the right to change, interrupt or terminate part or all of the live video / voice service at any time.In case of any loss caused by the change, interruption or termination of the live video / voice service, Trace shall not be liable to you or any third party, but Trace shall try its best to notify the user in the form of announcement, e-mail or system pop-up before the change, interruption or termination of the service.</p>
+        
+        <h2>Article 3 rules of use</h2>
+        
+        <p>3.1You promise that you will not damage the legitimate interests of a third party or violate Singapore laws, regulations and normative provisions by performing this agreement. You accept and perform this Agreement without violating any legal documents binding on you, and will not make Trace bear any responsibility to any third party.</p>
+        <p>3.2 You guarantee that you have the conditions, ability and qualification to perform the responsibilities and obligations of the anchor as agreed in this agreement.</p>
+        <p>3.3 You understand and agree that all income generated by you based on the Trace platform shall be subject to the background data of Trace; at the same time, you shall abide by the platform operation system such as but not limited to the live broadcasting code of conduct and the anchor management rules and requirements (hereinafter referred to as "platform rules and anchor specifications") updated from time to time on the Trace platform, as well as the national laws and regulations on such Internet servicesNormative provisions, etc.</p>
+        <p>3.4 You agree that Trace will use your name (including but not limited to your real name, pen name, net name, former name and any character symbol representing your identity) and portrait (including but not limited to real person portrait and cartoon portrait) free of charge for all kinds of publicity and promotion of Trace and its affiliated enterprises, and provide necessary cooperation.</p>
+        <p>3.5 You guarantee that you have the ownership or legal right to use all the pictures, posters, avatars and other contents uploaded in Trace, and have the right to upload them to Trace and authorize Trace to use them. You confirm that any improper behavior, violation of laws and regulations and relevant operation rules of Trace, or infringement of the legitimate rights and interests of a third party in the process of using the video / voice live broadcasting service shall be borne by youTrace has no responsibility.If the damage is caused by your behavior,
+        Trace shall be compensated, and Trace has the right to directly deduct the above compensation expenses from your shared expenses.</p>
+        <p>3.6 You shall bear the conditions and expenses (including but not limited to the telephone and Internet charges for Internet access and mobile phone charges for using mobile network) of the network, video and voice supporting equipment (including but not limited to computer, microphone, video device, mobile phone, earphone, sound card and other hardware and software) required for the live video / voice broadcastThe image and speech quality are clear and stable.If the live broadcast is blocked or unable to watch due to your network reasons, Trace has the right to ask you to upgrade the network. You should make corresponding rectification within 3 days after receiving Trace's suggestions or opinions, otherwise Trace has the right to take corresponding punishment measures.</p>
+        <p>3.7 The video / voice live service you provide on Trace platform and all the information, information and speech you publish shall not be involved in politics, guns, drugs, violence, pornography or any other content that violates Singapore laws, regulations and normative provisions, including but not limited to endangering national security, obscenity, falsity, slander, intimidation and harassment of others, infringement of intellectual property rights of othersBusiness secrets or other legitimate rights and interests, as well as contents that violate public order and good customs, or ways to point to the above contents.</p>
+        <p>3.8 You must provide true, accurate, legal and effective personal identity information and contact information to complete real name authentication; if your personal information or contact information changes, you must update it to Trace in time.</p>
+        <p>3.9 You must cooperate with Trace to verify the authenticity of personal data manually. Trace will keep the certified data strictly confidential and keep them permanently for future reference.</p>
+        <p>3.10 You promise to abide by the principle of good faith, do not disturb the normal order of Trace platform, do not publish commercial advertisements without the consent of Trace, and do not engage in activities unrelated to live online performance.</p>
+        <p>3.11 Your registered account number and password are the only identity certificate for you to accept the platform service. You are responsible for keeping and setting the password. It is forbidden to give, borrow, rent, transfer or sell.You should take full legal responsibility for all activities and events with your account.</p>
+        <p>3.12 You promise that the above information includes but is not limited to all kinds of accounts used in Trace, third-party payment accounts, corresponding passwords and other important information, and will not be disclosed in the process of live broadcast or other use of platform services, nor will you publish, upload or provide information involving your privacy to other people through platform services, otherwise you shall bear the responsibility and losses arising therefrom.</p>
+        <p>3.13 You promise not to do anything harmful to the image and brand of Trace, otherwise Trace has the right to terminate the agreement, close the account and ask you to bear all legal and compensation liabilities.</p>
+        <p>3.14 During the term of this Agreement and after the termination of this agreement, you are not allowed to spread and publicize any speech, picture, video, etc. that is harmful to the reputation and image of Trace in any way, spread any false information in any way, and damage the interests of Trace in any way, such as encouraging Trace users. Otherwise, Trace has the right to ask you for compensation (including but not limited to deduction of virtual props and income,Even close your account directly).</p>
+        <p>3.15 If a third party participates in your live broadcast, you should guarantee that there is no legal dispute with the third party. If there is any dispute, you are solely responsible for it and have nothing to do with Trace.If Trace suffers losses, you should compensate Trace for such losses.</p>
+        <p>3.16 You promise to actively maintain the image of Trace and Trace platform, and you shall not do anything harmful to the image or interests of Trace or Trace platform.During the term of this Agreement and after the termination of this agreement, you are not allowed to express any opinion suggestive of or unfavorable to Trace or Trace platform in any form through any channel.</p>
+        <p>3.17 You are not allowed to mention or display the name, logo, registration number and picture of other live broadcasting platforms in any form (including but not limited to personal news, personal information page, live room name, poster, text, voice, video, picture, background, setting, etc.) on any occasion. You are not allowed to guide existing users of Trace platform, other anchors or Trace employees to enterOtherwise, Trace has the right to punish your breach of contract.</p>
+        <p>3.18 Trace only provides platform services. If you establish a contractual relationship with a studio, brokerage company or other third party organization, all disputes arising from this have nothing to do with Trace, and Trace will not assume any responsibility.</p>
+        <p>3.19 If you are appointed to Trace by the studio, brokerage company or other third-party organization that has signed the relevant brokerage or labor relationship with you for live interaction, all the virtual props and income you get in Trace will be paid by Trace to the above-mentioned organization and settled with you by the above-mentioned organization. You agree not to claim against Trace at any time or in any way for the above-mentioned virtual props or incomeAny claim.</p>
+        
+        <h2>Article 4 intellectual property rights</h2>
+        
+        <p>4.1 Trace video / voice service includes Trace website, mobile application software, text, picture, video, audio and other elements. Trace owns all intellectual property rights of its service logo, logo and any of the above elements.</p>
+        <p>4.2 You are not allowed to reverse engineer, reverse assemble or reverse compile the relevant web pages, applications, software and other products involved in the platform services.</p>
+        <p>4.3 You license Trace free, permanent, irrevocable, exclusive and sublicense rights all over the world, including but not limited to: reproduction rights, distribution rights, etcThe right to exercise, lease, exhibition, performance, projection, broadcasting, information network transmission, film production, adaptation, translation, compilation and other copyright property rights and neighboring rights as stipulated in the copyright law.</p>
+        
+        <h2>Article 5 confidentiality obligation</h2>
+        
+        <p>5.1 Economic, direct or indirect losses shall be compensated by you.Trade secret refers to all practical and non-public information provided by Trace, or learned by you during the use of platform services, or Trace undertakes confidentiality obligations to a third party, which is related to Trace business and can bring economic benefits to Trace, including but not limited to technical information, business information and information and documents related to Trace Administration (including this Agreement)The amount and settlement method, standard, ownership method, authorization method, customer list, other anchor list, contact information, service fee, Trace staff list and other information that are not known to the public.</p>
+        <p>5.2 You shall strictly abide by this agreement. Without the written authorization or consent of Trace, you shall not:</p>
+        <p>5.2.1）In any way to a third party or unspecified public dissemination, disclosure;</p>
+        <p>5.2.2）Use the trade secrets of Trace for purposes other than the purpose of this agreement.</p>
+        <p>5.3 This clause shall survive the termination of this agreement.</p>
+        
+        <h2>Article 6 modification, rescission and termination of the agreement</h2>
+        
+        <p>6.1 Trace has the right to change, terminate or terminate this agreement when necessary.</p>
+        <p>6.2 Trace has the right to terminate the agreement immediately if you have any of the following circumstances:</p>
+        <p>6.2.1）Trace finds that you have violated the statements and commitments made in this Agreement;</p>
+        <p>6.2.2）Direct or indirect damage to the interests of Trace caused by your personal behavior;</p>
+        <p>6.2.3）Violating the laws, regulations or normative provisions of Singapore or your place;</p>
+        <p>6.2.4）Breach of other obligations stipulated in this Agreement;</p>
+        <p>6.2.5）Perform this agreement in a way that does not meet the requirements of Trace, such as passivity or inaction, and fail to correct within 10 days after Trace's notice.</p>
+        
+        <h2>Article 7 liability for breach of contract</h2>
+        
+        <p>7.1 Trace, Trace and the third party shall not be responsible for any direct and indirect damages and expenses incurred by you.</p>
+        <p>7.2 Trace has the right to claim compensation for the loss caused by your breach of this agreement.</p>
+        
+        <h2>Article 8 others</h2>
+        
+        <p>8.1 This agreement can be updated by Trace at any time. Once the updated agreement terms are published, they will replace the original agreement terms. After the change, we will inform you and need you to agree to this agreement again. You can check the latest version of the agreement terms in Trace platform.If you do not accept the modified terms after Trace modifies the terms of the agreement, please stop using the services provided by Trace immediately. If you continue to use the services provided by Trace, you will be deemed to accept the modified agreement.</p>
+        <p>8.2 Any dispute related to this Agreement shall be settled by both parties through negotiation.If the negotiation fails, please contact our data protection officer by email to workcompany27@gmail.com </p>
+        
+        
+    </div>
+    </div>
+    </div>
+    </div>
+    <footer><footer>
+    <div class="container">
+    <div class="row">
+    <div class="col-xs-12 col-md-6" style="text-align:left;margin:auto;vertical-align:middle;">
+    <div class="social-icons">
+    </div>
+    <div id="attribution">
+    <!-- <p><a href="/">Homepage</a></p> -->
+    <p>This site is protected by reCAPTCHA and the Google
+                            <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                            <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                        </p>
+    <p>
+                            This website is hosted by
+                            <a href="https://www.flycricket.com">Flycricket</a>
+    </p>
+    <p>Flycricket <a href="https://flycricket.com/privacy.html">Privacy Policy</a>, <a href="https://flycricket.com/cookie_policy.html">Cookie Policy</a>, &amp; <a href="https://flycricket.com/terms.html">Terms of Use</a></p>
+    </div>
+    </div>
+    <div class="col-xs-12 col-md-6 footer-store-button-container">
+    </div>
+    </div>
+    </div>
+    </footer></footer>
+    <script async="" src="https://www.googletagmanager.com/gtag/js"></script>
+    <script id="script_analytics">// $(function () {
+    // 	$.ajax({
+    // 		type: "POST",
+    // 		url: "https://app.flycricket.com/api/website_view/fc677fc1d73c47bab3d3b7934f8ab795",
+    // 		dataType: 'json',
+    // 		contentType: 'application/json',
+    // 		data: JSON.stringify({ referrer: document.referrer }),
+    // 		success: function (resp) {
+    // 			console.log(resp);
+    // 		},
+    // 		error: function (xhr, ajaxOptions, thrownError) {
+    // 			console.error(thrownError);
+    // 		}
+    // 	});
+    // });
+    
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-84588334-7');
+    
+    
+    </script>
+    </body>
+    </html>

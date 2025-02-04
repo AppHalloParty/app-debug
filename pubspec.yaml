@@ -1,0 +1,217 @@
+name: trace
+description: Live streaming, video reels and feed
+publish_to: "none"
+
+version: 3.0.0
+
+environment:
+  sdk: ">=3.2.6 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #Story
+  advstory: ^0.2.1
+
+  #push notifications
+  another_flushbar: ^1.12.30
+  app_tracking_transparency: ^2.0.6
+
+  #Text for Stories text
+  auto_size_text: ^3.0.0
+  auto_size_text_field: ^2.2.4
+  auto_size_text_plus: ^3.0.2
+  blur: ^4.0.0
+  cached_network_image: ^3.4.1
+
+  #Default
+  cupertino_icons: ^1.0.8
+  custom_zoom_widget: ^0.0.3
+  device_info_plus: ^11.2.2
+  devicelocale: ^0.8.1
+  dropdown_button2: ^2.3.9
+
+  #Utilities
+  easy_localization: ^3.0.7
+  emoji_picker_flutter: ^4.3.0
+  #ffmpeg_kit_flutter: ^6.0.3-LTS
+  encrypt: ^5.0.3
+
+  #See more or less Text
+  expandable_text: ^2.3.0
+
+  # fake name
+  faker: ^2.2.0
+  firebase_analytics: ^11.4.1
+  #flutter_local_notifications: ^18.0.0
+  #Social login
+  firebase_auth: ^5.4.1
+  firebase_auth_platform_interface: ^7.5.1
+  firebase_auth_web: ^5.13.7
+
+  #Firebase
+  firebase_core: ^3.10.1
+  firebase_crashlytics: ^4.3.1
+  firebase_messaging: ^15.2.1
+  firebase_performance: ^0.10.1
+
+  #Color Picker
+  flex_color_picker: ^3.7.0
+  flip_card: ^0.7.0
+
+  #Animation
+  flutter_animate: ^4.5.2
+  flutter_animation_progress_bar: ^2.3.1
+  flutter_app_version_checker: ^0.3.2
+  flutter_branch_sdk: ^8.2.0
+  flutter_cache_manager: ^3.3.0
+  flutter_image_compress: ^2.4.0
+  flutter_linkify: ^6.0.0
+  flutter_slider_drawer: ^3.0.2
+  flutter_sound: ^9.20.5
+
+  #Images
+  flutter_svg: ^2.0.17
+  geocoding: ^3.0.0
+  geolocator: ^13.0.2
+
+  #State management
+  get: ^4.6.6
+  google_fonts: ^6.2.1
+
+  #Ads
+  google_mobile_ads: ^5.3.1
+  google_sign_in: ^6.2.2
+
+  iban: ^1.1.0
+  image_cropper: ^9.0.0
+  image_picker: ^1.1.2
+  image_picker_web: ^4.0.0
+  in_app_review: ^2.0.10
+
+  #Ads in Videos
+  interactive_media_ads: ^0.2.3
+  js: ^0.7.1
+  just_audio: ^0.9.45
+  keyboard_attachable: ^2.2.0
+  like_button: ^2.0.5
+  linear_progress_bar: ^1.1.3
+  loading_animation_widget: ^1.3.0
+  location: ^8.0.0
+
+  #Animations and icons
+  #flutter_icons: ^1.1.0
+  #lottie: ^2.3.2
+  lottie: ^1.4.2
+  marquee: ^2.3.0
+  mime: any
+  onesignal_flutter: ^5.2.9
+
+  #Backend
+  parse_server_sdk_flutter: ^9.0.0
+  path_provider: ^2.1.5
+  #photo_manager: ^2.8.1
+  photo_manager_image_provider: ^2.2.0
+
+  #Geo data and phone helper
+  pin_code_fields: ^8.0.1
+  preload_page_view: ^0.2.0
+
+  #payments:
+  purchases_flutter: ^8.4.4
+  quickalert: ^1.1.0
+  sign_in_with_apple: ^6.1.4
+  sliding_clipped_nav_bar: ^3.1.1
+
+  sticky_grouped_list: ^3.1.0
+  story: ^1.1.0
+  svgaplayer_flutter_rhr: ^2.2.1
+  text_scroll: ^0.2.0
+  transparent_image: ^2.0.1
+  universal_io: ^2.2.2
+  universal_platform: ^1.1.0
+  url_launcher: ^6.3.1
+
+  #video editing
+  uuid: ^4.5.1
+  vibration: any
+  video_compress: ^3.1.3
+  video_editor: ^3.0.0
+  video_player: ^2.9.2
+  video_thumbnail: ^0.5.3
+  wakelock_plus: ^1.2.10
+
+  #web
+  web: ^1.1.0
+  webview_flutter: ^4.10.0
+  wechat_assets_picker: ^9.4.2
+  #video_editor: ^3.0.0
+  wechat_camera_picker: ^4.3.7
+  whatsapp_unilink: ^2.1.0
+
+  #Libraries
+  xml: ^6.5.0
+
+  #Live Streaming
+  zego_uikit: ^2.28.5
+  zego_uikit_prebuilt_call: ^4.16.21
+  zego_uikit_prebuilt_live_audio_room: ^3.15.8
+  zego_uikit_prebuilt_live_streaming: ^3.13.12
+  zego_uikit_signaling_plugin: ^2.8.9
+  fade_shimmer: ^2.3.0
+  share_plus: ^10.1.4
+  stop_watch_timer: ^3.2.1
+  
+  # update 3.0.1
+  calendar_date_picker2: ^1.1.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_native_splash: ^2.4.4
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/translations/
+    - assets/svg/
+    - assets/lotties/
+    - assets/video/
+    - assets/icons/
+    - assets/countries/
+
+dependency_overrides:
+  package_info_plus: ^4.1.0
+  uuid: ^3.0.7
+  parse_server_sdk: ^6.2.0
+  web: ^0.5.1
+  #parse_server_sdk: ^7.0.0
+  js: ^0.6.3
+  dio: ^5.3.2
+  intl: ^0.18.1
+  http: ^1.0.0
+  win32: ^5.4.0
+  #photo_manager: ^3.0.0-dev.2
+  photo_manager: ^3.6.1
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/ic_logo_white.png
+  #branding: assets/branding-production.png
+  color_dark: "#000000"
+  image_dark: assets/images/ic_logo_white.png
+  #branding_dark: assets/branding-production.png
+  android: true
+  ios: true
+
+  android_12:
+    image: assets/images/ic_logo_white.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/images/ic_logo_white.png
+    icon_background_color_dark: "#000000"
+    android: true
+
+  web: true
